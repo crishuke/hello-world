@@ -1,0 +1,22 @@
+pipeline {
+    agent { label 'master' }
+    stages {
+        stage('Build Windows') {
+            steps {
+                bat '''
+                  cmake -Bbuild
+                  cmake --build build
+                '''
+            }
+        }
+    }
+	post {
+    success {
+      bat 'echo success'
+      //archiveArtifacts artifacts: 'install/**/*', fingerprint: true
+    } // success
+    failure {
+		bat 'echo Failed to archive'
+    } // failure
+  } // post
+}
