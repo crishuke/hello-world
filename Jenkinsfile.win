@@ -4,6 +4,7 @@ pipeline {
         stage('Build Windows') {
             steps {
                 bat '''
+                  path
                   cmake -Bbuild
                   cmake --build build
                 '''
